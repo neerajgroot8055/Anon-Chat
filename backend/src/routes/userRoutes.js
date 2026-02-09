@@ -4,9 +4,7 @@ const User = require("../models/User");
 
 const router = express.Router();
 
-/**
- * UPDATE INTERESTS (Logged-in users only)
- */
+
 router.post("/interests", authMiddleware, async (req, res) => {
   try {
     const { interests } = req.body;
@@ -26,9 +24,7 @@ router.post("/interests", authMiddleware, async (req, res) => {
   }
 });
 
-/**
- * GET CURRENT USER
- */
+
 router.get("/me", authMiddleware, async (req, res) => {
   const user = await User.findById(req.user.userId).select("-password");
   res.json(user);

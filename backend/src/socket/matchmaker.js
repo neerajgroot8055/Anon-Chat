@@ -3,7 +3,6 @@ const User = require("../models/User");
 const { Server } = require("socket.io");
 const { v4: uuidv4 } = require("uuid");
 
-// In-memory matchmaking queue
 let queue = [];
 
 const initSocket = (server) => {
@@ -15,17 +14,15 @@ const initSocket = (server) => {
     console.log("🟢 User connected:", socket.id);
 socket.on("join_queue", async ({ token, isGuest, interests }) => {
   try {
-    /**
-     * STEP 1: IDENTIFY SOCKET USER
-     */
+   
     if (isGuest) {
-      // 🟢 GUEST
+  
       if (!Array.isArray(interests) || interests.length === 0) {
         return;
       }
 
       socket.user = {
-        id: socket.id,          // guest identity
+        id: socket.id,       
         username: "Guest",
         interests,
         isGuest: true,
@@ -33,7 +30,7 @@ socket.on("join_queue", async ({ token, isGuest, interests }) => {
 
       console.log("📥 Guest joined with", interests);
     } else {
-      // 🔐 AUTH USER
+      
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
       const user = await User.findById(decoded.userId);
 
@@ -55,20 +52,14 @@ socket.on("join_queue", async ({ token, isGuest, interests }) => {
       );
     }
 
-    /**
-     * STEP 2: CLEAN QUEUE
-     * - no duplicate sockets
-     * - no duplicate users
-     */
+   
     queue = queue.filter(
       (u) =>
         u.socket.id !== socket.id &&
         u.user.id !== socket.user.id
     );
 
-    /**
-     * STEP 3: INTEREST MATCH
-     */
+  
     let matchIndex = queue.findIndex(
       (u) =>
         u.user.id !== socket.user.id &&
@@ -77,18 +68,13 @@ socket.on("join_queue", async ({ token, isGuest, interests }) => {
         )
     );
 
-    /**
-     * STEP 4: FALLBACK MATCH
-     */
+  
     if (matchIndex === -1 && queue.length > 0) {
       matchIndex = queue.findIndex(
         (u) => u.user.id !== socket.user.id
       );
     }
 
-    /**
-     * STEP 5: MATCH OR QUEUE
-     */
     if (matchIndex !== -1) {
       const match = queue[matchIndex];
       const roomId = uuidv4();
@@ -153,9 +139,7 @@ socket.on("join_queue", async ({ token, isGuest, interests }) => {
       console.log(`⏭️ ${socket.id} skipped`);
     });
 
-    /**
-     * DISCONNECT
-     */
+   
     socket.on("disconnect", () => {
       const roomId = socket.currentRoom;
 
