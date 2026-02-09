@@ -55,12 +55,12 @@ const Interests = () => {
     return;
   }
 
-  // 🔐 AUTH USER FLOW
+  
   setLoading(true);
 
   try {
     const res = await fetch(
-      "http://localhost:3000/api/user/interests",
+      "https://anon-chat-i4ph.onrender.com/api/user/interests",
       {
         method: "POST",
         headers: {
@@ -76,7 +76,7 @@ const Interests = () => {
       return;
     }
 
-    // Save locally for routing protection
+    
     localStorage.setItem(
       "userInterests",
       JSON.stringify(selected)
@@ -95,7 +95,7 @@ const Interests = () => {
  
   <AuthLayout>
     <div className="space-y-6">
-      {/* Heading */}
+     
       <div className="text-center">
         <h2 className="text-xl font-semibold text-gray-800">
           Choose your interests
@@ -107,7 +107,7 @@ const Interests = () => {
         </p>
       </div>
 
-      {/* Predefined interests */}
+     
       <div className="flex flex-wrap gap-2 justify-center">
         {PREDEFINED_INTERESTS.map((interest) => (
           <button
@@ -124,7 +124,7 @@ const Interests = () => {
         ))}
       </div>
 
-      {/* Custom interest */}
+     
       <div className="flex gap-2">
         <input
           placeholder="Add custom interest"
@@ -140,7 +140,7 @@ const Interests = () => {
         </button>
       </div>
 
-      {/* Selected interests preview */}
+     
       {selected.length > 0 && (
         <div className="text-center text-sm text-gray-600">
           Selected:{" "}
@@ -150,7 +150,7 @@ const Interests = () => {
         </div>
       )}
 
-      {/* CTA */}
+     
       <button
         onClick={saveInterests}
         disabled={loading}

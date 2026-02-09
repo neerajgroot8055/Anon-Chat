@@ -19,7 +19,7 @@ const Signup = () => {
     setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:3000/api/auth/signup", {
+      const res = await fetch("https://anon-chat-i4ph.onrender.com/api/auth/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -50,12 +50,12 @@ const Signup = () => {
   return (
     <AuthLayout>
   <div className="space-y-4">
-    {/* Heading */}
+    
     <h2 className="text-xl font-semibold text-gray-800 text-center">
       Create your account
     </h2>
 
-    {/* Username */}
+    
     <input
       placeholder="Username"
       value={username}
@@ -63,7 +63,7 @@ const Signup = () => {
       className="w-full px-4 py-2 border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
     />
 
-    {/* Email */}
+   
     <input
       placeholder="Email"
       value={email}
@@ -71,7 +71,7 @@ const Signup = () => {
       className="w-full px-4 py-2 border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
     />
 
-    {/* Password */}
+    
     <input
       type="password"
       placeholder="Password"
@@ -80,7 +80,7 @@ const Signup = () => {
       className="w-full px-4 py-2 border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
     />
 
-    {/* Primary CTA */}
+   
     <button
       onClick={handleSignup}
       disabled={loading}
@@ -89,14 +89,14 @@ const Signup = () => {
       {loading ? "Creating..." : "Sign Up"}
     </button>
 
-    {/* Divider */}
+    
     <div className="flex items-center gap-2 text-gray-400 text-xs">
       <div className="flex-1 h-px bg-gray-200" />
       OR
       <div className="flex-1 h-px bg-gray-200" />
     </div>
 
-    {/* Login link */}
+    
     <button
       onClick={() => navigate("/login")}
       className="w-full text-sm text-indigo-600 hover:underline"
@@ -104,7 +104,7 @@ const Signup = () => {
       Already have an account? Login
     </button>
 
-    {/* Guest CTA */}
+    
     <button
       onClick={() => {
         localStorage.setItem("isGuest", "true");

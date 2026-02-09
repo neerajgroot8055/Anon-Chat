@@ -14,13 +14,13 @@ export const AuthProvider = ({ children }) => {
   };
 
  const logout = () => {
-  // Auth
+  
   localStorage.removeItem("token");
 
-  // User-specific data
+  
   localStorage.removeItem("userInterests");
 
-  // Guest cleanup (future-proof)
+  
   localStorage.removeItem("isGuest");
   localStorage.removeItem("guestInterests");
 

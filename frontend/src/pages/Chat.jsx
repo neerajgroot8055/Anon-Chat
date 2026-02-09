@@ -21,7 +21,7 @@ const Chat = () => {
   const [status, setStatus] = useState("Connecting...");
 
   useEffect(() => {
-    // 🚫 If not logged in AND not guest → do nothing
+    
     if (!token && !isGuest) return;
 
     const s = connectSocket(isGuest ? null : token);
@@ -109,7 +109,7 @@ const Chat = () => {
       socket.disconnect();
     }
 
-    // Clear ALL session data
+    
     localStorage.removeItem("isGuest");
     localStorage.removeItem("guestInterests");
     localStorage.removeItem("userInterests");

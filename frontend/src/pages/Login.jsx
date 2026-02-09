@@ -20,7 +20,7 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:3000/api/auth/login", {
+      const res = await fetch("https://anon-chat-i4ph.onrender.com/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -33,7 +33,7 @@ const Login = () => {
         return;
       }
 
-      // ✅ SUCCESS LOGIN
+      
       login(data.token);
 
       const interests = data.user?.interests || [];
@@ -58,12 +58,12 @@ const Login = () => {
   return (
   <AuthLayout>
     <div className="space-y-10">
-      {/* Heading */}
+      
       <h2 className="text-xl font-semibold text-gray-800 text-center">
         Welcome back
       </h2>
 
-      {/* Email */}
+    
       <input
         placeholder="Email"
         value={email}
@@ -71,7 +71,7 @@ const Login = () => {
         className="w-full px-4 py-2 border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
       />
 
-      {/* Password */}
+     
       <input
         type="password"
         placeholder="Password"
@@ -80,7 +80,7 @@ const Login = () => {
         className="w-full px-4 py-2 border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
       />
 
-      {/* Primary CTA */}
+    
       <button
         onClick={handleLogin}
         disabled={loading}
@@ -89,14 +89,14 @@ const Login = () => {
         {loading ? "Logging in..." : "Login"}
       </button>
 
-      {/* Divider */}
+     
       <div className="flex items-center gap-2 text-gray-400 text-xs">
         <div className="flex-1 h-px bg-gray-200" />
         OR
         <div className="flex-1 h-px bg-gray-200" />
       </div>
 
-      {/* Signup link */}
+     
       <button
         onClick={() => navigate("/signup")}
         className="w-full text-sm text-indigo-600 hover:underline"
